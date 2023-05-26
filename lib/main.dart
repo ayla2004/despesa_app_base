@@ -1,3 +1,5 @@
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 import './pages/home.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: HomePage(),
+
+      //utilizado para dar suporte a localização de datas
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      supportedLocales: [const Locale('pt')],
     );
   }
 }

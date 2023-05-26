@@ -1,12 +1,18 @@
 import 'package:despesas_app/controller/home_controller.dart';
 import 'package:despesas_app/model/entities/despesa.dart';
+import 'package:despesas_app/pages/adicionar_despesa_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../core/formater_utils.dart';
 
-class Home extends StatelessWidget {
-  Home({super.key});
+class HomePage extends StatefulWidget {
+  HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final _controller = HomeController();
 
   Color _corDespesa(TipoDespesa tipo) {
@@ -24,11 +30,29 @@ class Home extends StatelessWidget {
     }
   }
 
+  void _abrirAdicionarDespesaPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) {
+          return AdicionarDespesaPage();
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Despesas"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _abrirAdicionarDespesaPage,
+        child: Icon(
+          Icons.add,
+          size: 40.0,
+        ),
       ),
       body: ListView.builder(
         itemCount: _controller.despesas.length,
