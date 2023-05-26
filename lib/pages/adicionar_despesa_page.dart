@@ -6,6 +6,15 @@ class AdicionarDespesaPage extends StatelessWidget {
   AdicionarDespesaPage({super.key});
 
   final _controller = AdicionaDespesaController();
+  final _formKey = GlobalKey<FormState>();
+
+  _cadastrar() {
+    //verificar se os dados do form estão válidos
+    //se estiver válidos, chamar o cadastrar no controle
+    if (_formKey.currentState!.validate()) {
+      _controller.cadastrar();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +25,7 @@ class AdicionarDespesaPage extends StatelessWidget {
       body: Column(
         children: [
           Form(
+            key: _formKey,
             child: Column(
               children: [
                 TextFormField(
@@ -51,7 +61,9 @@ class AdicionarDespesaPage extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              _cadastrar();
+            },
             child: Text("Cadastrar"),
           ),
         ],
