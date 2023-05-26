@@ -1,23 +1,13 @@
 import 'package:despesas_app/model/entities/despesa.dart';
+import 'package:despesas_app/model/repositories/local_repositorio_despesas.dart';
 
 class AdicionaDespesaController {
+  final _repositorio = repositorio;
   var titulo = "";
   var descricao = "";
   var valor = 0.0;
   var data = DateTime.now();
   var tipo = TipoDespesa.OUTROS;
-
-  setTitulo(String? valor) {
-    titulo = valor ?? "";
-  }
-
-  setDescricao(String? valor) {
-    descricao = valor ?? "";
-  }
-
-  setValor(String? param) {
-    valor = double.tryParse(param ?? "0") ?? 0;
-  }
 
   String? validarTitulo(String? value) {
     if ((value == null) || (value.isEmpty)) {
@@ -41,5 +31,15 @@ class AdicionaDespesaController {
     }
   }
 
-  void cadastrar() {}
+  void cadastrar() {
+    final despesa = Despesa(
+      id: "0000",
+      titulo: titulo,
+      descricao: descricao,
+      valor: valor,
+      data: data,
+      tipo: tipo,
+    );
+    _repositorio.adicionar(despesa);
+  }
 }

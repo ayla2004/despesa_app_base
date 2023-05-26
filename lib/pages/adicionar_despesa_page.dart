@@ -8,11 +8,13 @@ class AdicionarDespesaPage extends StatelessWidget {
   final _controller = AdicionaDespesaController();
   final _formKey = GlobalKey<FormState>();
 
-  _cadastrar() {
+  _cadastrar(BuildContext context) {
     //verificar se os dados do form estão válidos
     //se estiver válidos, chamar o cadastrar no controle
     if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
       _controller.cadastrar();
+      //Navigator.of(context).pop();
     }
   }
 
@@ -32,20 +34,31 @@ class AdicionarDespesaPage extends StatelessWidget {
                   validator: _controller.validarTitulo,
                   autovalidateMode: AutovalidateMode.always,
                   decoration: InputDecoration(labelText: "Título"),
+                  onSaved: (value) {
+                    _controller.titulo = value ?? "";
+                  },
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: "Descrição"),
+                  onSaved: (value) {
+                    _controller.descricao = value ?? "";
+                  },
                 ),
                 TextFormField(
-                  validator: _controller.validarValor,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  decoration: InputDecoration(labelText: "Valor R\$"),
-                ),
+                    validator: _controller.validarValor,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    decoration: InputDecoration(labelText: "Valor R\$"),
+                    onSaved: (value) {
+                      _controller.valor = double.parse(value ?? "0");
+                    }),
                 InputDatePickerFormField(
                   fieldLabelText: "Data",
                   firstDate: DateTime(2023),
                   lastDate: DateTime.now(),
                   initialDate: DateTime.now(),
+                  onDateSaved: (value) {
+                    _controller.data = value;
+                  },
                 ),
                 DropdownButtonFormField(
                   decoration: InputDecoration(labelText: "Tipo"),
@@ -55,14 +68,16 @@ class AdicionarDespesaPage extends StatelessWidget {
                       value: tipo,
                     );
                   }).toList(),
-                  onChanged: (item) {},
+                  onChanged: (item) {
+                    _controller.tipo = item ?? TipoDespesa.OUTROS;
+                  },
                 )
               ],
             ),
           ),
           ElevatedButton(
             onPressed: () {
-              _cadastrar();
+              _cadastrar(context);
             },
             child: Text("Cadastrar"),
           ),
