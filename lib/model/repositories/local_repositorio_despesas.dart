@@ -33,10 +33,17 @@ class LocalRepositorioDespesa implements RepositorioDespesas {
   final List<Despesa> _despesas = [];
 
   LocalRepositorioDespesa() {
-    _despesas.addAll(_gerarDespesasFake(200));
+    //_despesas.addAll(_gerarDespesasFake(200));
   }
 
   @override
   // TODO: implement despesas
   List<Despesa> get despesas => List.unmodifiable(_despesas);
+
+  @override
+  void adicionar(Despesa nova) {
+    _despesas.add(nova);
+  }
 }
+
+final repositorio = LocalRepositorioDespesa();

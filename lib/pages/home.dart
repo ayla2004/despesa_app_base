@@ -38,7 +38,9 @@ class _HomePageState extends State<HomePage> {
           return AdicionarDespesaPage();
         },
       ),
-    );
+    ).then((value) {
+      setState(() {});
+    });
   }
 
   @override
@@ -46,6 +48,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Despesas"),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.report),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _abrirAdicionarDespesaPage,
