@@ -33,7 +33,7 @@ class LocalRepositorioDespesa implements RepositorioDespesas {
   final List<Despesa> _despesas = [];
 
   LocalRepositorioDespesa() {
-    //_despesas.addAll(_gerarDespesasFake(200));
+    //  _despesas.addAll(_gerarDespesasFake(200));
   }
 
   @override

@@ -15,10 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
-
-      //utilizado para dar suporte a localização de datas
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
-      supportedLocales: [const Locale('pt')],
+      supportedLocales: [const Locale("pt")],
     );
   }
 }

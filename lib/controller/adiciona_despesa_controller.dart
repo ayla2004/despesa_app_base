@@ -11,7 +11,7 @@ class AdicionaDespesaController {
 
   String? validarTitulo(String? value) {
     if ((value == null) || (value.isEmpty)) {
-      return "Digite um título";
+      return "Digite um titulo";
     }
     if (value.length < 5) {
       return "Tamanho inválido! Deve ter mais de 5 caracteres!";
@@ -19,8 +19,8 @@ class AdicionaDespesaController {
   }
 
   String? validarValor(String? value) {
-    if (value == null) {
-      return "Digite um valor";
+    if ((value == null) || (value.isEmpty)) {
+      return "Digite um valor!";
     }
     double? valor = double.tryParse(value);
     if (valor == null) {
@@ -33,13 +33,12 @@ class AdicionaDespesaController {
 
   void cadastrar() {
     final despesa = Despesa(
-      id: "0000",
-      titulo: titulo,
-      descricao: descricao,
-      valor: valor,
-      data: data,
-      tipo: tipo,
-    );
+        id: "0000",
+        titulo:  titulo,
+        descricao:  descricao,
+        valor:  valor,
+        data:  data,
+        tipo:  tipo);
     _repositorio.adicionar(despesa);
   }
 }
